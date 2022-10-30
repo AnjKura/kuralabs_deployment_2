@@ -31,6 +31,7 @@ pipeline {
    stage ('Deploy') {
      steps {
        sh '/var/lib/jenkins/.local/bin/eb deploy url-shortener-dev'
+       git clone https://github.com/AnjKura/kuralabs_deployment_2.git
       }
     }
   }
