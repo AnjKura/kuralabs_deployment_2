@@ -31,6 +31,15 @@ pipeline {
    stage ('Deploy') {
      steps {
        sh '/var/lib/jenkins/.local/bin/eb deploy url-shortener-dev'
+       git clone https://github.com/AnjKura/kuralabs_deployment_2
+       cd ./kuralabs_deployment_2
+       python3 -m venv test3
+       source test3/bin/activate
+       pip install -r requirements.txt
+       pip install gunicorn
+       JENKINS_NODE_COOKIE=stayAlive
+       gunicorn -w 4 application:app -b 0.0.0.0:8080 --daemon
+       '''
       }
     }
   }
